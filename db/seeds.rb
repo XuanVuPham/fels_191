@@ -35,7 +35,7 @@ end
 5.times do
   user_id = Random.rand(4) + 1
   question_id = Random.rand(4) + 1
-  lesson_id = Random.rand(4) + 1
+  lesson_id = Random.rand(3) + 1
   answer_id = Random.rand(4) + 1
   Result.create!(user_id: user_id, question_id: question_id, lesson_id: lesson_id, answer_id: answer_id)
 end
