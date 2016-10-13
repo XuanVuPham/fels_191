@@ -23,6 +23,18 @@
             <%= t "users" %>
           <% end %>
         </li>
+        <li>
+          <%= link_to admin_questions_path do %>
+            <span class="glyphicon glyphicon-list"></span>
+            <%= t "list_question" %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to new_admin_question_path do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+            <%= t "create_question" %>
+          <% end %>
+        </li>
       </ul>
     </div>
   </div>
