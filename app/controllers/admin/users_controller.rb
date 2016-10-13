@@ -4,12 +4,16 @@ class Admin::UsersController < ApplicationController
   before_action :load_user, only: :destroy
 
   def index
-    @users = User.newest.paginate page: params[:page], per_page: Settings.per_page
+    @users = User.search_condition(params[:search]).newest
+      .paginate page: params[:page], per_page: Settings.per_page
   end
 
   def destroy
-    @user.destroy
-    flash[:success] = "User deleted"
+    if @user.destroy
+      flash[:success] = t "admin.user.user_del"
+    else
+      flash[:danger] = t "admin.user.user_del_fail"
+    end
     redirect_to admin_users_path
   end
 end

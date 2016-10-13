@@ -25,4 +25,8 @@ module ApplicationHelper
     href = html_options[:href] || "#"
     content_tag(:a, name, html_options.merge(href: href, onclick: onclick))
   end
+
+  def active_class link_path
+    active = current_page?(link_path) ? "active" : ""
+  end
 end

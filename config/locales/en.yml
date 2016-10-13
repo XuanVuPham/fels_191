@@ -112,6 +112,8 @@ en:
     confirm_del: "You sure?"
     user:
       user_not_found: "User not found!"
+      user_del: "User deleted!"
+      user_del_fail: "User not deleted!"
     category:
       category_successfully: "Category create successfully!"
       category_error_create: "Something went wrong!"

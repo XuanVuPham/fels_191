@@ -10,6 +10,9 @@ class User < ApplicationRecord
     uniqueness: {case_sensitive: false}
   validates :password, presence: true, length: {minimum: 6}, allow_nil: true
   scope :newest, -> {order created_at: :desc}
+  scope :search_condition, ->condition do
+    where "name LIKE ? OR email LIKE ?", "%#{condition}%", "%#{condition}%" if condition.present?
+  end
 
   def is_user? user
     self == user

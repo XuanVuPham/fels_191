@@ -9,6 +9,11 @@
   <div class="row box">
     <div class="col-sm-12">
       <h3 class="pull-left"><%= t "users" %></h3>
+      <div class="pull-right">
+        <%= form_tag admin_users_path, method: :get, id: "admin_search" do %>
+          <%= render "admin/shared/form_search" %>
+        <% end %>
+      </div>
     </div>
     <div class="col-sm-12">
       <div class="table-bordered">
@@ -20,21 +25,8 @@
               <th colspan="2"><%= t "email" %></th>
             </tr>
           </thead>
-          <tbody>
-            <% @users.each_with_index do |user, index| %>
-              <tr>
-                <td>#<%= current_index Settings.per_page, index,
-                @users.current_page %></td>
-                <td><%= user.name %></td>
-                <td><%= user.email %></td>
-                <td>
-                  <% unless current_user.is_user? user %>
-                    <%= link_to t("delete"), admin_user_path(user.id), method: :delete,
-                      class: "btn btn-danger btn-sm", data: {confirm: t("admin.confirm_del")} %>
-                    <% end %>
-                </td>
-              </tr>
-            <% end %>
+          <tbody id="result_search">
+            <%= render "user" %>
           </tbody>
         </table>
       </div>
