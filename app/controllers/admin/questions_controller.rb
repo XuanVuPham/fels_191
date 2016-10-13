@@ -34,11 +34,26 @@ class Admin::QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new question_params
-    if @question.save
-      flash[:success] = t "saved"
+    @question = Question.create question_params
+    check1 = false
+    check2 = false
+    if @question.answers.length > 1
+       @question.answers.each do |answer|
+        if answer.is_correct
+          check1 = true
+        else
+          check2 = true
+        end
+      end
+      if check1 == true && check2 == true
+        flash[:success] = t "saved"
+      else
+        flash[:danger] = t "save_not_success"
+        @question.destroy
+      end
     else
       flash[:danger] = t "save_not_success"
+      @question.destroy
     end
     redirect_to new_admin_question_path
   end

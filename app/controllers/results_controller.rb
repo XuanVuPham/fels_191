@@ -1,4 +1,6 @@
 class ResultsController < ApplicationController
+  before_action :logged_in_user
+
   def index
   end
 
@@ -8,7 +10,7 @@ class ResultsController < ApplicationController
       flash[:danger] = t "user_empty"
       redirect_to root_path
     end
-    @results = @user.results.correct_anwsers.search_by_condition(params[:search])
+    @results = @user.results.search_by_condition(params[:search])
       .paginate page: params[:page], per_page: Settings.per_page
     @lessons = @user.lessons.includes(:category).uniq_by_category
   end
